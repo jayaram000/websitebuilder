@@ -1,26 +1,26 @@
 # 🌐 WebsiteBuilder API
 
-WebsiteBuilder is a Django-based backend that enables users to register, authenticate using JWT, and generate personalized business website content. It allows users to manage their generated websites and view HTML previews of their content.
+**WebsiteBuilder** is a Django-based backend that enables users to register, authenticate using JWT, and generate personalized business website content. It allows users to manage their generated websites and view HTML previews of the content.
 
 ---
 
 ## 🚀 Features
 
-- ✅ JWT-based user authentication (email & password)
-- 📝 Generate business website content via API
-- 🧾 Store and retrieve websites per authenticated user
-- 👁️ HTML preview of generated content
-- 🧪 Postman collection included for easy testing
+✅ JWT-based user authentication (email & password)  
+📝 Generate business website content via API  
+🧾 Store and retrieve websites per authenticated user  
+👁️ HTML preview of generated content  
+🧪 Postman collection included for easy testing  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python 3.10+
-- Django 3.x
-- Django REST Framework
-- MongoDB using [Djongo](https://www.djongomapper.com/)
-- JWT Authentication
+- Python 3.10+  
+- Django 3.x  
+- Django REST Framework  
+- MongoDB (with Djongo)  
+- JWT Authentication  
 
 ---
 
@@ -28,60 +28,110 @@ WebsiteBuilder is a Django-based backend that enables users to register, authent
 
 ### 📦 Prerequisites
 
-- Python 3.10+
-- MongoDB installed and running locally or on Atlas
-- Git, pip
+- Python 3.10+  
+- MongoDB (local or MongoDB Atlas)  
+- Git  
+- pip (Python package manager)
+
+---
 
 ### 🔧 Installation
 
 ```bash
-
-# Clone the repo
+# Clone the repository
 git clone https://github.com/jayaram000/websitebuilder.git
 cd websitebuilder
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
+source venv/bin/activate  # For Windows: venv\Scripts\activate
 
+# Install dependencies
+pip install -r requirements.txt
+```
 
-API END POINTS
+---
 
-## POST /api/register/
+## 📡 API Endpoints
+
+### 🔐 Authentication
+
+#### POST `/api/register/`  
 Register a new user.
 
+**Body:**
+```json
 {
   "email": "user@example.com",
   "password": "yourpassword"
 }
+```
 
-## POST /api/login/
+---
+
+#### POST `/api/login/`  
 Login and receive JWT access & refresh tokens.
+
+**Body:**
+```json
 {
   "email": "user@example.com",
   "password": "yourpassword"
 }
+```
 
-## POST /api/generate/
-Generate website content based on business type and industry.
+**Response:**
+```json
+{
+  "access": "your-access-token",
+  "refresh": "your-refresh-token"
+}
+```
 
+Use `access` token in header:  
+`Authorization: Bearer <access-token>`
+
+---
+
+### 🏗️ Website Generation
+
+#### POST `/api/generate/`  
+Generate website content.
+
+**Body:**
+```json
 {
   "business_type": "Cafe",
   "industry": "Food & Beverage"
 }
+```
 
-## GET /api/websites/
-Retrieve all websites created by the currently logged-in user.
+---
 
-## GET /api/websitedetails/<int:pk>/
-Retrieve specific website details by ID.
-Also supports:
+### 📂 Website Management
 
-PUT – Update content
-DELETE – Delete entry
+#### GET `/api/websites/`  
+List all websites created by the authenticated user.
 
-## GET /api/preview/<uuid:preview_id>/
-HTML preview of a generated website using UUID.
+---
 
-# Install dependencies
-pip install -r requirements.txt
+#### GET `/api/websitedetails/<int:pk>/`  
+Retrieve specific website by ID.  
+**Also supports:**  
+- `PUT` – Update content  
+- `DELETE` – Delete website  
+
+---
+
+### 👁️ HTML Preview
+
+#### GET `/api/preview/<uuid:preview_id>/`  
+Preview the generated content in raw HTML using UUID.
+
+---
+
+## 📩 Postman Collection
+
+Import the following file into Postman to test all endpoints:  
+**`Websitebuilder.postman_collection.json`**
+
