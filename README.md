@@ -36,6 +36,15 @@ WebsiteBuilder is a Django-based backend that enables users to register, authent
 
 ```bash
 
+# Clone the repo
+git clone https://github.com/jayaram000/websitebuilder.git
+cd websitebuilder
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+
 API END POINTS
 
 ## POST /api/register/
@@ -53,14 +62,26 @@ Login and receive JWT access & refresh tokens.
   "password": "yourpassword"
 }
 
+## POST /api/generate/
+Generate website content based on business type and industry.
 
-# Clone the repo
-git clone https://github.com/jayaram000/websitebuilder.git
-cd websitebuilder
+{
+  "business_type": "Cafe",
+  "industry": "Food & Beverage"
+}
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
+## GET /api/websites/
+Retrieve all websites created by the currently logged-in user.
+
+## GET /api/websitedetails/<int:pk>/
+Retrieve specific website details by ID.
+Also supports:
+
+PUT – Update content
+DELETE – Delete entry
+
+## GET /api/preview/<uuid:preview_id>/
+HTML preview of a generated website using UUID.
 
 # Install dependencies
 pip install -r requirements.txt
