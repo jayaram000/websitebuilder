@@ -35,6 +35,25 @@ WebsiteBuilder is a Django-based backend that enables users to register, authent
 ### 🔧 Installation
 
 ```bash
+
+API END POINTS
+
+## POST /api/register/
+Register a new user.
+
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+
+## POST /api/login/
+Login and receive JWT access & refresh tokens.
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+
+
 # Clone the repo
 git clone https://github.com/jayaram000/websitebuilder.git
 cd websitebuilder
